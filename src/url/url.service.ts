@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
+import * as path from 'path';
 
 /**
  * This service is responsible for generating dynamic URLs by replacing a specific domain with a user-provided URL.
@@ -17,7 +18,8 @@ export class UrlService {
    * It reads the URL list from a JSON file and parses it into an array of strings.
    */
   constructor() {
-    this.urlList = JSON.parse(fs.readFileSync('src/url/url-list.json', 'utf8'));
+    const jsonFilePath = path.join(__dirname, 'url-list.json');
+    this.urlList = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
   }
 
   /**
